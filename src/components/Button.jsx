@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
+
 const Button = ({children, className, outline, onClick}) => {
     return (
         <button className={classNames('button', className, {
@@ -8,5 +9,6 @@ const Button = ({children, className, outline, onClick}) => {
         })}>{children}</button>
     )
 }
+
 
 export default Button
