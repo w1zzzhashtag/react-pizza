@@ -1,23 +1,21 @@
-import React, {useState} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Categories = React.memo(({items, onClickItem}) => {
-    const [activeItem, setActiveItem] = useState(null)
-
+const Categories = React.memo(({items, onClickCategory, activeCategory}) => {
     const onSelectItem = (index) => {
-        setActiveItem(index)
-        onClickItem(index)
+        onClickCategory(index)
     }
 
     return (
         <div className="categories">
             <ul>
                 <li 
-                    className={activeItem === null ? 'active' : ''}
+                    className={activeCategory === null ? 'active' : ''}
                     onClick={() => onSelectItem(null)}
                 >Все</li>
                 {items && items.map((item, index) => (
                     <li 
-                        className={activeItem === index ? 'active': ''}
+                        className={activeCategory === index ? 'active': ''}
                         onClick={() => onSelectItem(index)} 
                         key={index}
                     >
@@ -28,5 +26,16 @@ const Categories = React.memo(({items, onClickItem}) => {
         </div>
     )
 })
+
+Categories.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onClickCategory: PropTypes.func,
+    // activeCategory: PropTypes.oneOf([PropTypes.number, null]),
+}
+
+Categories.defaultProps = {
+    items: [],
+    activeCategory: null,
+}
 
 export default Categories
